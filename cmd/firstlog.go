@@ -23,7 +23,7 @@ var (
 	ctx, cancel = context.WithCancel(context.Background())
 	signalChan  = make(chan os.Signal, 1)
 
-	svc       = initialize.NewInitSvc("/conf/firstlog.yaml")
+	svc       = initialize.NewInitSvc("conf/firstlog.yaml")
 	inputTask = svc.InputTask()
 	outputES  = svc.OutputES()
 )
