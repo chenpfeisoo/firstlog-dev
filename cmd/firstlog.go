@@ -21,9 +21,9 @@ type cmd struct {
 
 var (
 	ctx, cancel = context.WithCancel(context.Background())
-	signalChan	= make(chan os.Signal, 1)
+	signalChan  = make(chan os.Signal, 1)
 
-	svc       = initialize.NewInitSvc("conf/firstlog.yaml")
+	svc       = initialize.NewInitSvc("/Users/felixchen/firstlog.log")
 	inputTask = svc.InputTask()
 	outputES  = svc.OutputES()
 )
@@ -43,7 +43,7 @@ func (c *cmd) Run() {
 
 	signal.Notify(signalChan, syscall.SIGINT, syscall.SIGTERM)
 	for {
-		sig := <- signalChan
+		sig := <-signalChan
 		fmt.Printf("signal: %v\n", sig)
 		switch sig {
 		case syscall.SIGINT:
@@ -61,9 +61,9 @@ func shutdown(c *cmd) {
 	for {
 		time.Sleep(time.Second * 1)
 		if collect.GoTailRum != 0 {
-			fmt.Println("wait...",collect.GoTailRum)
+			fmt.Println("wait...", collect.GoTailRum)
 			continue
-		}else if collect.GoTailRum == 0 {
+		} else if collect.GoTailRum == 0 {
 			c.SaveMetadata2Registry()
 			fmt.Println("Shutdown to complete")
 			break
@@ -72,9 +72,9 @@ func shutdown(c *cmd) {
 }
 
 func NewCmd() *cmd {
-	Input  := input.NewInput(ctx,inputTask)
+	Input := input.NewInput(ctx, inputTask)
 	Output := output.NewOutput(outputES)
 
-	res := &cmd{Input, Output,}
+	res := &cmd{Input, Output}
 	return res
 }

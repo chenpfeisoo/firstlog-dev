@@ -103,5 +103,5 @@ func file2Device(source string) string {
 	if err != nil {
 		log.Println(err)
 	}
-	return strconv.FormatUint(st.Dev,10)
+	return strconv.FormatInt(int64(st.Dev), 10)
 }

@@ -40,15 +40,19 @@ type Content struct {
 	Content   string `json:"content"`
 }
 
-func NewEs(addresses,index []string,shards,replicas,version string,detailEnable bool,reg,template string) (es *ES,err error) {
+func NewEs(addresses,index []string,shards,replicas,version string,detailEnable bool,reg,template string,username,password string) (es *ES,err error) {
 	if version == "6" {
 		client6, err = elasticsearch6.NewClient(elasticsearch6.Config{
 			Addresses: addresses,
+			Username: username,
+			Password: password,
 		})
 	}
 	if version == "7" {
 		client7, err = elasticsearch7.NewClient(elasticsearch7.Config{
 			Addresses: addresses,
+			Username: username,
+			Password: password,
 		})
 	}
 	if err != nil {

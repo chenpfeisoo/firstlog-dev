@@ -87,7 +87,7 @@ func (watcher *RecursiveWatcher) Run() {
 							if !IgnoreFile(watcher.ignore,filepath.Base(event.Name)) {
 								_ = filepath.Walk(event.Name, func(path string, info os.FileInfo, err error) error {
 									if info.IsDir() {
-										err := watcher.RemoveNew(path)
+										err := watcher.Remove(path)
 										if err != nil {
 											log.Println(err)
 										}
