@@ -23,7 +23,7 @@ var (
 	ctx, cancel = context.WithCancel(context.Background())
 	signalChan  = make(chan os.Signal, 1)
 
-	svc       = initialize.NewInitSvc("/Users/felixchen/firstlog.log")
+	svc       = initialize.NewInitSvc("/data/firstlog.log")
 	inputTask = svc.InputTask()
 	outputES  = svc.OutputES()
 )
